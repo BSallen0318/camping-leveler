@@ -80,7 +80,24 @@ export default function Home() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+  const [sensorGranted, setSensorGranted] = useState<boolean>(typeof window !== 'undefined' && (window as any).DeviceOrientationEvent?.requestPermission ? false : true);
   const beeped = useRef(false);
+
+  // iOS 센서 권한 요청
+  const requestSensorPermission = async () => {
+    if (typeof window !== 'undefined' && (window as any).DeviceOrientationEvent?.requestPermission) {
+      try {
+        const res = await (window as any).DeviceOrientationEvent.requestPermission();
+        if (res === 'granted') {
+          setSensorGranted(true);
+        } else {
+          alert('센서 권한이 거부되었습니다. 설정에서 허용해 주세요.');
+        }
+      } catch {
+        alert('센서 권한 요청 중 오류가 발생했습니다.');
+      }
+    }
+  };
 
   // 센서 이벤트
   useEffect(() => {
@@ -160,6 +177,28 @@ export default function Home() {
       }, 2000);
     }
   };
+
+  // 렌더링
+  if (!sensorGranted) {
+    return (
+      <div className="min-h-screen flex flex-col justify-center items-center" style={{ background: COLOR_BG }}>
+        <div className="text-xl font-bold mb-6" style={{ color: COLOR_TEXT }}>
+          센서 권한이 필요합니다
+        </div>
+        <div className="mb-8 text-center text-base" style={{ color: COLOR_TEXT }}>
+          iOS(아이폰/아이패드)에서는<br />수평계 사용을 위해<br />센서 권한이 필요합니다.<br />
+          아래 버튼을 눌러 권한을 허용해 주세요.
+        </div>
+        <button
+          onClick={requestSensorPermission}
+          className="px-6 py-3 rounded text-lg font-bold shadow"
+          style={{ background: COLOR_BUBBLE_ACTIVE, color: 'white' }}
+        >
+          센서 권한 요청
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col justify-between items-center" style={{ background: COLOR_BG }}>
