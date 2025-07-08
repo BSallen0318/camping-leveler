@@ -31,11 +31,10 @@ const beep = () => {
 
 // 플래시라이트 제어 (지원 브라우저 한정)
 async function toggleFlash(on: boolean) {
-  // @ts-ignore
   const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-  // @ts-ignore
-  const track = stream.getVideoTracks()[0];
-  // @ts-ignore
+  // 일부 브라우저에서 torch 지원이 불완전하므로 타입 단언 사용
+  const track = (stream.getVideoTracks()[0] as MediaStreamTrack);
+  // @ts-expect-error: torch는 일부 브라우저에서만 지원
   await track.applyConstraints({ advanced: [{ torch: on }] });
   return track;
 }
@@ -72,7 +71,7 @@ export default function Home() {
   const [flash, setFlash] = useState(false);
   const [locked, setLocked] = useState(false);
   const [portrait, setPortrait] = useState(true);
-  const [track, setTrack] = useState<any>(null);
+  const [track, setTrack] = useState<MediaStreamTrack | null>(null);
   const [showReset, setShowReset] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
