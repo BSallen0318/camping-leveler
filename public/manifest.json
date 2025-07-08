@@ -1,0 +1,27 @@
+{
+  "name": "캠핑 레벨러",
+  "short_name": "캠핑레벨러",
+  "description": "캠핑 시 텐트, 캠핑카, 테이블 등의 수평을 스마트폰만으로 쉽고 정확하게 맞출 수 있는 앱",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f3e7",
+  "theme_color": "#3cb371",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "lifestyle"],
+  "lang": "ko",
+  "dir": "ltr"
+} 

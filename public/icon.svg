@@ -1,0 +1,33 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 배경 원 -->
+  <circle cx="256" cy="256" r="256" fill="#f5f3e7"/>
+  
+  <!-- 외곽 링 -->
+  <circle cx="256" cy="256" r="220" fill="#444" stroke="#222" stroke-width="4"/>
+  <circle cx="256" cy="256" r="200" fill="#e0e8d9"/>
+  
+  <!-- 중앙 링 -->
+  <circle cx="256" cy="256" r="160" fill="#444" stroke="#222" stroke-width="3"/>
+  <circle cx="256" cy="256" r="140" fill="#f5f3e7"/>
+  
+  <!-- 내부 링 -->
+  <circle cx="256" cy="256" r="100" fill="#444" stroke="#222" stroke-width="2"/>
+  <circle cx="256" cy="256" r="80" fill="#e0e8d9"/>
+  
+  <!-- 중앙 버블 -->
+  <circle cx="256" cy="256" r="60" fill="#3cb371" stroke="#222" stroke-width="3"/>
+  
+  <!-- 캠핑 텐트 실루엣 (상단) -->
+  <path d="M 200 120 L 256 80 L 312 120 L 312 140 L 200 140 Z" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  <path d="M 200 120 L 256 80 L 312 120" fill="none" stroke="#654321" stroke-width="3"/>
+  
+  <!-- 수평선 표시 -->
+  <line x1="180" y1="256" x2="332" y2="256" stroke="#444" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="256" y1="180" x2="256" y2="332" stroke="#444" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- 각도 표시 (작은 원) -->
+  <circle cx="256" cy="180" r="8" fill="#3cb371"/>
+  <circle cx="256" cy="332" r="8" fill="#3cb371"/>
+  <circle cx="180" cy="256" r="8" fill="#3cb371"/>
+  <circle cx="332" cy="256" r="8" fill="#3cb371"/>
+</svg> 
