@@ -235,7 +235,7 @@ export default function Home() {
         </div>
       </div>
       {/* 하단 툴바 */}
-      <div className="w-full flex justify-center items-center gap-4 py-4" style={{ background: COLOR_TOOLBAR, borderTop: "1.5px solid #e0e8d9" }}>
+      <div className="w-full flex justify-center items-center gap-4 py-4 pb-safe" style={{ background: COLOR_TOOLBAR, borderTop: "1.5px solid #e0e8d9" }}>
         <button className={disableBtn} onClick={() => setSound((v) => !v)} aria-label="소리 알림 토글">
           <IconSound on={sound} />
         </button>
