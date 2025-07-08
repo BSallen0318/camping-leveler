@@ -16,7 +16,9 @@ const LEVEL_TOLERANCE = 0.5;
 
 // 효과음(짧은 삑)
 const beep = () => {
-  const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+  const AudioCtx = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof window.AudioContext }).webkitAudioContext;
+  if (!AudioCtx) return;
+  const ctx = new AudioCtx();
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
   osc.type = "sine";
@@ -32,9 +34,11 @@ const beep = () => {
 // 플래시라이트 제어 (지원 브라우저 한정)
 async function toggleFlash(on: boolean) {
   const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-  const track = stream.getVideoTracks()[0] as MediaStreamTrack & { applyConstraints?: (c: any) => Promise<void> };
-  if (track.applyConstraints) {
-    await track.applyConstraints({ advanced: [{ torch: on }] });
+  const track = stream.getVideoTracks()[0];
+  // torch는 일부 브라우저에서만 지원되므로, 타입 단언 없이 안전하게 체크
+  if (typeof track.applyConstraints === "function") {
+    // advanced 옵션은 표준이지만, 타입 정의에 없으므로 타입 단언 사용
+    await (track.applyConstraints as (c: any) => Promise<void>)({ advanced: [{ torch: on }] });
   }
   return track;
 }
